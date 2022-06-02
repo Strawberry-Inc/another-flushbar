@@ -392,26 +392,34 @@ class _FlushbarState<K extends Object?> extends State<Flushbar<K>>
   //TODO : review EdgeInsets
   @override
   Widget build(BuildContext context) {
-    return Align(
-      heightFactor: 1.0,
-      child: Material(
-        color: widget.flushbarStyle == FlushbarStyle.FLOATING
-            ? Colors.transparent
-            : widget.backgroundColor,
-        child: SafeArea(
-          minimum: widget.flushbarPosition == FlushbarPosition.BOTTOM
-          ? EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom + widget.positionOffset)
-          : EdgeInsets.only(
-              top: MediaQuery.of(context).viewInsets.top + widget.positionOffset),
-          bottom: widget.flushbarPosition == FlushbarPosition.BOTTOM,
-          top: widget.flushbarPosition == FlushbarPosition.TOP,
-          left: false,
-          right: false,
-          child: _getFlushbar(),
-        ),
-      ),
-    );
+     return GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.translucent,
+        child: Align(
+          heightFactor: 1.0,
+          child: Material(
+            color: widget.flushbarStyle == FlushbarStyle.FLOATING
+                ? Colors.transparent
+                : widget.backgroundColor,
+            child: SafeArea(
+              minimum: widget.flushbarPosition == FlushbarPosition.BOTTOM
+                  ? EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom)
+                  : EdgeInsets.only(top: MediaQuery.of(context).viewInsets.top),
+              // ? EdgeInsets.only(
+              //     bottom: (MediaQuery.of(context).padding.bottom +
+              //         widget.positionOffset))
+              // : EdgeInsets.only(
+              //     top: (MediaQuery.of(context).padding.top) +
+              //         widget.positionOffset),
+              bottom: widget.flushbarPosition == FlushbarPosition.BOTTOM,
+              top: widget.flushbarPosition == FlushbarPosition.TOP,
+              left: false,
+              right: false,
+              child: _getFlushbar(),
+            ),
+          ),
+        ));
   }
 
   Widget _getFlushbar() {
