@@ -10,7 +10,7 @@ import 'flushbar_route.dart' as route;
 const String FLUSHBAR_ROUTE_NAME = '/flushbarRoute';
 
 typedef FlushbarStatusCallback = void Function(FlushbarStatus? status);
-typedef OnTap = void Function(Flushbar flushbar);
+typedef OnTap = void Function();
 
 /// A highly customizable widget so you can notify your user when you fell like he needs a beautiful explanation.
 // ignore: must_be_immutable
@@ -393,7 +393,7 @@ class _FlushbarState<K extends Object?> extends State<Flushbar<K>>
   @override
   Widget build(BuildContext context) {
      return GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         behavior: HitTestBehavior.translucent,
         child: Align(
           heightFactor: 1.0,
