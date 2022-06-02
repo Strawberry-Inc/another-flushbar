@@ -25,6 +25,7 @@ class FlushbarRoute<T> extends OverlayRoute<T> {
     RouteSettings? settings,
   })  : _builder = Builder(builder: (BuildContext innerContext) {
           return GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap:
                 flushbar.onTap != null ? () => flushbar.onTap!(flushbar) : null,
             child: flushbar,
