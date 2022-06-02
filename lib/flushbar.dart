@@ -10,7 +10,7 @@ import 'flushbar_route.dart' as route;
 const String FLUSHBAR_ROUTE_NAME = '/flushbarRoute';
 
 typedef FlushbarStatusCallback = void Function(FlushbarStatus? status);
-typedef OnTap = void Function();
+typedef OnTap = void Function(Flushbar flushbar);
 
 /// A highly customizable widget so you can notify your user when you fell like he needs a beautiful explanation.
 // ignore: must_be_immutable
@@ -392,34 +392,31 @@ class _FlushbarState<K extends Object?> extends State<Flushbar<K>>
   //TODO : review EdgeInsets
   @override
   Widget build(BuildContext context) {
-     return GestureDetector(
-        onTap: widget.onTap,
-        behavior: HitTestBehavior.translucent,
-        child: Align(
-          heightFactor: 1.0,
-          child: Material(
-            color: widget.flushbarStyle == FlushbarStyle.FLOATING
-                ? Colors.transparent
-                : widget.backgroundColor,
-            child: SafeArea(
-              minimum: widget.flushbarPosition == FlushbarPosition.BOTTOM
-                  ? EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom)
-                  : EdgeInsets.only(top: MediaQuery.of(context).viewInsets.top),
-              // ? EdgeInsets.only(
-              //     bottom: (MediaQuery.of(context).padding.bottom +
-              //         widget.positionOffset))
-              // : EdgeInsets.only(
-              //     top: (MediaQuery.of(context).padding.top) +
-              //         widget.positionOffset),
-              bottom: widget.flushbarPosition == FlushbarPosition.BOTTOM,
-              top: widget.flushbarPosition == FlushbarPosition.TOP,
-              left: false,
-              right: false,
-              child: _getFlushbar(),
-            ),
-          ),
-        ));
+    return Align(
+      heightFactor: 1.0,
+      child: Material(
+        color: widget.flushbarStyle == FlushbarStyle.FLOATING
+            ? Colors.transparent
+            : widget.backgroundColor,
+        child: SafeArea(
+          minimum: widget.flushbarPosition == FlushbarPosition.BOTTOM
+              ? EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom)
+              : EdgeInsets.only(top: MediaQuery.of(context).viewInsets.top),
+          // ? EdgeInsets.only(
+          //     bottom: (MediaQuery.of(context).padding.bottom +
+          //         widget.positionOffset))
+          // : EdgeInsets.only(
+          //     top: (MediaQuery.of(context).padding.top) +
+          //         widget.positionOffset),
+          bottom: widget.flushbarPosition == FlushbarPosition.BOTTOM,
+          top: widget.flushbarPosition == FlushbarPosition.TOP,
+          left: false,
+          right: false,
+          child: _getFlushbar(),
+        ),
+      ),
+    );
   }
 
   Widget _getFlushbar() {
